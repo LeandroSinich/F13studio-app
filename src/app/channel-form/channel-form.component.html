@@ -1,0 +1,86 @@
+<form [formGroup]="channelForm" novalidate (ngSubmit)="onSubmit($event)">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Canal</mat-card-title>
+    </mat-card-header>    
+
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Grupo" formControlName="grupo">
+              @for (grupo of grupos; track grupo) {
+              <mat-option [value]="grupo.abbreviation">{{
+                grupo.name
+              }}</mat-option>
+              }
+            </mat-select>
+            @if (channelForm.controls['grupo'].hasError('required')) {
+            <mat-error>Grupo es <strong>requerido</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Detalle" formControlName="detalle" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Nombre"
+              formControlName="name"
+            />
+            @if (channelForm.controls['name'].hasError('required')) {
+            <mat-error>Nombre es <strong>requerido</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>        
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Microfono" formControlName="mic">
+              @for (mic of microfonos; track mic) {
+              <mat-option [value]="mic.abbreviation">{{mic.marca}} {{mic.modelo}}</mat-option>
+              }
+            </mat-select>
+            @if (channelForm.controls['mic'].hasError('required')) {
+            <mat-error>Microfono es <strong>requerido</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-checkbox 
+          formControlName="power" 
+          class="full-width"
+          >Phantom Power</mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea
+              matInput
+              placeholder="Anotaciones"
+              formControlName="anotaciones"
+            ></textarea>
+            @if (channelForm.controls['anotaciones'].hasError('required')) {
+            <mat-error>Address is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="reverse">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
