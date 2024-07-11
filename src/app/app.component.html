@@ -1,3 +1,20 @@
-<!-- <app-nav-bar/> -->
-<app-channel-form/>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">F13Studio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="" [ngClass]="{active: status == 'home'}" (click)="selectMenu('home')">Consola</a>
+          </li>   
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="canal" [ngClass]="{active: status == 'products'}" (click)="selectMenu('products')">Canales</a>
+          </li>   
+                      
+        </ul>
+      </div>
+    </div>
+  </nav>
 <router-outlet />

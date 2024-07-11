@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -7,6 +7,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LocalStorageService } from '../services/local-storage.service';
+import { IChannels } from '../ichannels';
 
 
 @Component({
@@ -24,7 +27,22 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule
   ]
 })
-export class ChannelFormComponent {
+export class ChannelFormComponent implements OnInit {
+ 
+
+  id?: number;  
+  private _router = inject(Router);
+  private _route = inject(ActivatedRoute);
+  private _localStorageService = inject(LocalStorageService);
+
+  ngOnInit(): void {
+    this._route.params.subscribe(params =>{
+      this.id = params['id'];      
+  }
+    )
+  }
+
+
   private fb = inject(FormBuilder);
   channelForm = this.fb.group({
     detalle: null,
@@ -33,6 +51,7 @@ export class ChannelFormComponent {
     mic: [null, Validators.required],
     grupo: [null, Validators.required],    
     power: false,
+    id: this.id
   });
 
   
@@ -67,9 +86,33 @@ export class ChannelFormComponent {
     
   ];
 
+  navigate(){
+    this._router.navigate(['/canal'])
+  }
+
   onSubmit(evento: Event): void {
     evento.preventDefault();
-    console.log(this.channelForm);
-    alert('Guardado');
+    if (this.channelForm.valid) {
+      const formValue = this.channelForm.value; 
+      
+      const channel: IChannels = {
+        detalle: formValue.detalle || '',
+        name: formValue.name!,
+        anotaciones: formValue.anotaciones!,
+        mic: formValue.mic!,
+        grupo: formValue.grupo!,
+        power: formValue.power || false,
+        id: this.id!
+      };
+      let channels = this._localStorageService.getChannels();
+    const index = channels.findIndex(c => c.id === this.id);
+    if (index !== -1) {      
+      this._localStorageService.updateChannel(channel)
+    }else{
+
+      this._localStorageService.addChannel(channel);
+    }
+  
+    }
   }
 }

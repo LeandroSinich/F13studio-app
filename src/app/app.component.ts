@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { ChannelFormComponent } from './channel-form/channel-form.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavBarComponent, ChannelFormComponent],
+  imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'F13Studio-app';
+  status: string = 'home';
+
+  selectMenu(menu: string){
+    this.status = menu;
+  }
 }

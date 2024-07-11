@@ -1,7 +1,10 @@
+<mat-card-actions >
+  <button mat-raised-button color="primary" type="button" (click)="navigate()">Volver</button>
+</mat-card-actions>
 <form [formGroup]="channelForm" novalidate (ngSubmit)="onSubmit($event)">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>Canal</mat-card-title>
+      <mat-card-title>Canal {{id}}</mat-card-title>
     </mat-card-header>    
 
     <mat-card-content>
