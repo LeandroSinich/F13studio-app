@@ -31,7 +31,7 @@ export class ConsolaComponent implements OnInit {
   }
 
   canalDetailNavigate(id: number){
-    // this._router.navigate(['/products', id])
-    alert('detalle de canal: ' + id);
+    this._router.navigate(['', id])
+    
   }
 }

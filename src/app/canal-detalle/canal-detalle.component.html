@@ -1,1 +1,13 @@
-<p>canal-detalle works!</p>
+<button type="button" class="btn btn-outline-secondary mt-2 ms-2" (click)="volver()">volver</button>
+<div class="container center">
+    <div class="card" style="width: 18rem;">
+        <img src="/f13logo.jpeg" class="card-img-top" alt="logo">
+        <div class="card-body">
+          <h5 class="card-title">{{canal?.name}} grupo: {{canal?.grupo}}</h5>
+          <p class="card-text">{{canal?.detalle}}</p>
+          <p class="card-text">{{canal?.anotaciones}}</p>
+          <h6>mic: {{canal?.mic}}</h6>
+        </div>
+      </div>
+</div>
+
