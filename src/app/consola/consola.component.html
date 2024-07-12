@@ -1,0 +1,33 @@
+<table class="table table-sm align-middle caption-top">
+    <caption>Lista de canales</caption>
+  <thead>
+    <tr>
+      <th scope="col">Canal</th>
+      <th scope="col">P.Power</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Grupo</th>
+      <th scope="col">Mic</th>
+      <th scope="col">Detalle</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    @for (canal of canales; track $index) {
+    <tr [ngClass]="{'table-warning': canal.grupo == 'Bata', 'table-secondary': canal.grupo == 'Bajo', 'table-danger': canal.grupo == 'Vox', 'table-primary': canal.grupo == 'GTR'}">
+      <th scope="row">{{ canal.id }}</th>
+      <td>@if (canal.power) { ✅ }@else { ❌ }</td>
+      <td>{{ canal.name }}</td>
+      <td>{{ canal.grupo }}</td>
+      <td>{{ canal.mic }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-outline-info"
+          (click)="canalDetailNavigate(canal.id)"
+        >
+          Detalle
+        </button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
